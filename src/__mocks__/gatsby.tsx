@@ -1,7 +1,7 @@
 // it’s a good idea to mock the gatsby module itself. This may not be needed at first, but will make things a lot easier if you want to test components that use Link or GraphQL.
 
-const React = require("react")
-const gatsby = jest.requireActual("gatsby")
+const React = require('react')
+const gatsby = jest.requireActual('gatsby')
 module.exports = {
     ...gatsby,
     graphql: jest.fn(),
@@ -18,7 +18,7 @@ module.exports = {
             to,
             ...rest
         }) =>
-            React.createElement("a", {
+            React.createElement('a', {
                 ...rest,
                 href: to,
             })
