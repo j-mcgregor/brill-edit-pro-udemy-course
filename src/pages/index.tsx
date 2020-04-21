@@ -1,20 +1,75 @@
 import React from 'react'
-import { Link } from 'gatsby'
-import Layout from '../components/layout'
-import Image from '../components/image'
-import SEO from '../components/seo'
+import { graphql } from 'gatsby'
+import Layout from '../components/Layout'
+import SEO from '../components/SEO'
+import SliceZone from '../components/SliceZone'
 
-const IndexPage = () => (
-    <Layout>
-        <SEO title="Home" />
-        <h1>Hi people</h1>
-        <p>Welcome to your new Gatsby site.</p>
-        <p>Now go build something great.</p>
-        <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-            <Image />
-        </div>
-        <Link to="/page-2/">Go to page 2</Link>
-    </Layout>
-)
+export const query = graphql`
+    query Hero {
+        prismic {
+            allHomepages {
+                edges {
+                    node {
+                        _linkType
+                        body {
+                            ... on PRISMIC_HomepageBodyHero {
+                                type
+                                label
+                                primary {
+                                    hero_title
+                                    hero_content
+                                    background_image
+                                }
+                            }
+                            ... on PRISMIC_HomepageBodyCall_to_action_grid {
+                                type
+                                primary {
+                                    section_title
+                                }
+                                fields {
+                                    button_destination {
+                                        ... on PRISMIC_Page {
+                                            page_title
+                                            content
+                                            _meta {
+                                                uid
+                                            }
+                                        }
+                                    }
+                                    button_label
+                                    call_to_action_content
+                                    call_to_action_title
+                                    featured_image
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+`
+
+const IndexPage = ({
+    data: {
+        prismic: {
+            allHomepages: { edges },
+        },
+    },
+}: {
+    data: GatsbyTypes.HeroQuery
+}) => {
+    console.log(edges)
+    let body: any | undefined
+    if (edges && edges[0] && edges[0].node.body) {
+        body = edges[0].node.body
+    }
+    return (
+        <Layout>
+            <SEO title="Home" />
+            {body && <SliceZone body={body} />}
+        </Layout>
+    )
+}
 
 export default IndexPage

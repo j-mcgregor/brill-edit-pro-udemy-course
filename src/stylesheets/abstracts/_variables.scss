@@ -2,15 +2,22 @@
 // This file contains all application-wide Sass variables.
 // -----------------------------------------------------------------------------
 
+/* COOLORS Theme */
+$color1: rgba(255, 255, 255, 1);
+$color2: rgba(255, 232, 209, 1);
+$color3: rgba(86, 142, 163, 1);
+$color4: rgba(104, 195, 212, 1);
+$color5: rgba(130, 98, 81, 1);
+
 /// Regular font family
 /// @type List
-$text-font-stack: "Open Sans", "Helvetica Neue Light", "Helvetica Neue",
-    "Helvetica", "Arial", sans-serif !default;
+$text-font-stack: 'Open Sans', 'Helvetica Neue Light', 'Helvetica Neue',
+    'Helvetica', 'Arial', sans-serif !default;
 
 /// Code (monospace) font family
 /// @type List
-$code-font-stack: "Courier New", "DejaVu Sans Mono", "Bitstream Vera Sans Mono",
-    "Monaco", monospace !default;
+$code-font-stack: 'Courier New', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono',
+    'Monaco', monospace !default;
 
 /// Copy text color
 /// @type Color
@@ -40,16 +47,16 @@ $max-width: 1180px !default;
 /// @prop {String} keys - Keys are identifiers mapped to a given length
 /// @prop {Map} values - Values are actual breakpoints expressed in pixels
 $breakpoints: (
-    "small": 320px,
-    "medium": 768px,
-    "large": 1024px,
+    'small': 320px,
+    'medium': 768px,
+    'large': 1024px,
 ) !default;
 
 /// Relative or absolute URL where all assets are served from
 /// @type String
 /// @example scss - When using a CDN
 ///   $base-url: 'http://cdn.example.com/assets/';
-$base-url: "/assets/" !default;
+$base-url: '/assets/' !default;
 
 // Lux 4.3.1
 // Bootswatch
@@ -81,7 +88,7 @@ $green: #4bbf73 !default;
 $teal: #20c997 !default;
 $cyan: #1f9bcf !default;
 
-$primary: $gray-900 !default;
+$primary: $color1 !default;
 $secondary: $white !default;
 $success: $green !default;
 $info: $cyan !default;
@@ -108,9 +115,9 @@ $body-color: $gray-700 !default;
 
 // Fonts
 
-$font-family-sans-serif: "Nunito Sans", -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol" !default;
+$font-family-sans-serif: 'Nunito Sans', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol' !default;
 
 $font-size-base: 0.875rem !default;
 

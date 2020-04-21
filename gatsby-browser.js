@@ -3,5 +3,7 @@
  *
  * See: https://www.gatsbyjs.org/docs/browser-apis/
  */
+const { registerLinkResolver } = require('gatsby-source-prismic-graphql')
+const { linkResolver } = require('./src/utils/linkResolver')
 
-// You can delete this file if you're not using it
+registerLinkResolver(linkResolver)
