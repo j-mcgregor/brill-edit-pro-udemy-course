@@ -1,8 +1,8 @@
 // Lux 4.3.1
 // Bootswatch
-@import "../abstracts/variables";
+@import '../abstracts/variables';
 // Variables ===================================================================
-$web-font-path: "https://fonts.googleapis.com/css?family=Nunito+Sans:400,600&display=swap" !default;
+$web-font-path: 'https://fonts.googleapis.com/css?family=Nunito+Sans:400,600&display=swap' !default;
 @import url($web-font-path);
 
 // Navbar ======================================================================
@@ -24,7 +24,7 @@ $web-font-path: "https://fonts.googleapis.com/css?family=Nunito+Sans:400,600&dis
 }
 
 .bg-primary {
-    background-color: theme-color("primary") !important;
+    background-color: theme-color('primary') !important;
 }
 
 .bg-light {
@@ -79,7 +79,7 @@ $web-font-path: "https://fonts.googleapis.com/css?family=Nunito+Sans:400,600&dis
     }
 }
 
-[class*="btn-outline-"] {
+[class*='btn-outline-'] {
     border-width: 2px;
 }
 

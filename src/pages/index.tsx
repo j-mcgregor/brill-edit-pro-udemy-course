@@ -42,6 +42,19 @@ export const query = graphql`
                                     featured_image
                                 }
                             }
+                            ... on PRISMIC_HomepageBodyPrice_list {
+                                type
+                                label
+                                fields {
+                                    price_type
+                                    price_per_month
+                                    price_list_title
+                                    price_list_description
+                                }
+                                primary {
+                                    title
+                                }
+                            }
                         }
                     }
                 }

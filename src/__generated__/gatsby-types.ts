@@ -1673,7 +1673,7 @@ type PRISMIC_Homepage = PRISMIC__Document & PRISMIC__Linkable & {
   readonly _linkType: Maybe<Scalars['String']>;
 };
 
-type PRISMIC_HomepageBody = PRISMIC_HomepageBodyHero | PRISMIC_HomepageBodyCall_to_action_grid;
+type PRISMIC_HomepageBody = PRISMIC_HomepageBodyHero | PRISMIC_HomepageBodyCall_to_action_grid | PRISMIC_HomepageBodyPrice_list;
 
 type PRISMIC_HomepageBodyCall_to_action_grid = {
   readonly type: Maybe<Scalars['String']>;
@@ -1716,6 +1716,24 @@ type PRISMIC_HomepageBodyHeroPrimary = {
 
 type PRISMIC_HomepageBodyHeroPrimary_background_imageSharpArgs = {
   crop: Maybe<Scalars['String']>;
+};
+
+type PRISMIC_HomepageBodyPrice_list = {
+  readonly type: Maybe<Scalars['String']>;
+  readonly label: Maybe<Scalars['String']>;
+  readonly primary: Maybe<PRISMIC_HomepageBodyPrice_listPrimary>;
+  readonly fields: Maybe<ReadonlyArray<PRISMIC_HomepageBodyPrice_listFields>>;
+};
+
+type PRISMIC_HomepageBodyPrice_listFields = {
+  readonly price_list_title: Maybe<Scalars['PRISMIC_Json']>;
+  readonly price_list_description: Maybe<Scalars['PRISMIC_Json']>;
+  readonly price_per_month: Maybe<Scalars['Float']>;
+  readonly price_type: Maybe<Scalars['String']>;
+};
+
+type PRISMIC_HomepageBodyPrice_listPrimary = {
+  readonly title: Maybe<Scalars['PRISMIC_Json']>;
 };
 
 /** A connection to a list of items. */
@@ -3175,12 +3193,12 @@ type NavigationQueryQuery = { readonly prismic: { readonly allNavigations: { rea
 type Unnamed_1_QueryVariables = {};
 
 
-type Unnamed_1_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author'>> }> };
+type Unnamed_1_Query = { readonly placeholderImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluidFragment> }> }> };
 
 type Unnamed_2_QueryVariables = {};
 
 
-type Unnamed_2_Query = { readonly placeholderImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluidFragment> }> }> };
+type Unnamed_2_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author'>> }> };
 
 type HeroQueryVariables = {};
 
@@ -3202,8 +3220,27 @@ type HeroQuery = { readonly prismic: { readonly allHomepages: { readonly edges: 
                 & { readonly _meta: Pick<PRISMIC_Meta, 'uid'> }
               ) | { readonly __typename: 'PRISMIC_Navigation' } | { readonly __typename: 'PRISMIC_Homepage' } | { readonly __typename: 'PRISMIC__ExternalLink' } | { readonly __typename: 'PRISMIC__FileLink' } | { readonly __typename: 'PRISMIC__ImageLink' }> }
             )>> }
+          ) | (
+            { readonly __typename: 'PRISMIC_HomepageBodyPrice_list' }
+            & Pick<PRISMIC_HomepageBodyPrice_list, 'type' | 'label'>
+            & { readonly fields: Maybe<ReadonlyArray<Pick<PRISMIC_HomepageBodyPrice_listFields, 'price_type' | 'price_per_month' | 'price_list_title' | 'price_list_description'>>>, readonly primary: Maybe<Pick<PRISMIC_HomepageBodyPrice_listPrimary, 'title'>> }
           )>> }
         ) }>>> } } };
+
+type PageQueryVariables = {
+  id: Maybe<Scalars['String']>;
+};
+
+
+type PageQuery = { readonly prismic: { readonly allPages: { readonly edges: Maybe<ReadonlyArray<Maybe<{ readonly node: (
+          Pick<PRISMIC_Page, 'page_title' | 'content' | '_linkType'>
+          & { readonly _meta: Pick<PRISMIC_Meta, 'uid' | 'id'> }
+        ) }>>> } } };
+
+type PagesQueryQueryVariables = {};
+
+
+type PagesQueryQuery = { readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
 
 type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 
@@ -3252,20 +3289,5 @@ type GatsbyImageSharpSizes_withWebp_tracedSVGFragment = Pick<ImageSharpSizes, 't
 type GatsbyImageSharpSizes_noBase64Fragment = Pick<ImageSharpSizes, 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
 
 type GatsbyImageSharpSizes_withWebp_noBase64Fragment = Pick<ImageSharpSizes, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
-
-type PageQueryVariables = {
-  id: Maybe<Scalars['String']>;
-};
-
-
-type PageQuery = { readonly prismic: { readonly allPages: { readonly edges: Maybe<ReadonlyArray<Maybe<{ readonly node: (
-          Pick<PRISMIC_Page, 'page_title' | 'content' | '_linkType'>
-          & { readonly _meta: Pick<PRISMIC_Meta, 'uid' | 'id'> }
-        ) }>>> } } };
-
-type PagesQueryQueryVariables = {};
-
-
-type PagesQueryQuery = { readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
 
 }

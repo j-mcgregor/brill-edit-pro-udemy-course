@@ -1,0 +1,14 @@
+@for $i from 0 through 10 {
+    .bx-y#{$i} {
+        box-shadow: 0 #{$i}px 10px -2px black;
+    }
+    .bx-y-#{$i} {
+        box-shadow: 0 -#{$i}px 10px -2px black;
+    }
+    .bx-x#{$i} {
+        box-shadow: #{$i}px 0 10px -2px black;
+    }
+    .bx-x-#{$i} {
+        box-shadow: -#{$i}px 0 10px -2px black;
+    }
+}

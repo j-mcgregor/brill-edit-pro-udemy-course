@@ -2,6 +2,7 @@ import React from 'react'
 import Hero, { BackgroundImageProps } from './Hero'
 import createKey from '../utils/createKey'
 import CallToActionGrid from './CallToActionGrid'
+import PriceListGrid from './PriceListGrid'
 
 export interface CallToActionProps {
     _typename: string
@@ -48,6 +49,8 @@ const SliceZone: React.FC<SliceZoneProps> = ({ body }) => {
                     key={createKey(b.type, i)}
                 />
             )
+        } else if (b.type === 'price_list') {
+            return <PriceListGrid title={b.primary.title} options={b.fields} />
         }
         return <div key={createKey(b.type, i)} />
     })
