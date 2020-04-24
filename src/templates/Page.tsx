@@ -1,8 +1,8 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import RichText from '../utils/RichText'
-import Layout from '../components/Layout'
-import SliceZone from '../components/SliceZone'
+import Layout from '../components/layout'
+import SliceZone from '../components/sliceZone'
 
 // we're expecting a page ID param that we can include in here
 // This page is handled in the gatsby-config file

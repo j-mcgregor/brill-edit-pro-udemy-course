@@ -1,7 +1,7 @@
 import React from 'react'
 import RichText from '../../utils/RichText'
-import { CallToActionProps } from '../SliceZone'
-import CallToActionCard from './CallToActionCard'
+import { CallToActionProps } from '../sliceZone'
+import CallToActionCard from './callToActionCard'
 import createKey from '../../utils/createKey'
 
 interface CallToActionGridProps {

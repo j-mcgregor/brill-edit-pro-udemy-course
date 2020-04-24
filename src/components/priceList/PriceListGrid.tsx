@@ -1,6 +1,6 @@
 import React from 'react'
 import RichText from '../../utils/RichText'
-import PriceListCard from './PriceListCard'
+import PriceListCard from './priceListCard'
 import createKey from '../../utils/createKey'
 
 export interface RichTextItemProps {

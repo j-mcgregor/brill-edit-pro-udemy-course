@@ -1,8 +1,8 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import Layout from '../components/Layout'
-import SEO from '../components/SEO'
-import SliceZone from '../components/SliceZone'
+import Layout from '../components/layout'
+import SEO from '../components/seo'
+import SliceZone from '../components/sliceZone'
 
 export const query = graphql`
     query Hero {

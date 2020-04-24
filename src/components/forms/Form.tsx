@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import createKey from '../../utils/createKey'
-import TextInput from './TextInput'
-import TextAreaInput from './TextAreaInput'
+import TextInput from './textInput'
+import TextAreaInput from './textAreaInput'
 
 export interface FormFieldProps {
     field_name: string

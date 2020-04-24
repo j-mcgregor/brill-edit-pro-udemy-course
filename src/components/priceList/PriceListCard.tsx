@@ -1,6 +1,6 @@
 import React from 'react'
 import RichText from '../../utils/RichText'
-import { RichTextItemProps } from './PriceListGrid'
+import { RichTextItemProps } from './priceListGrid'
 import styled from 'styled-components'
 
 interface PriceListCardProps {

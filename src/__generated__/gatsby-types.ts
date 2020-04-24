@@ -10,9 +10,16 @@ type Scalars = {
   Int: number;
   Float: number;
   Date: string;
+  /** DateTime */
   PRISMIC_DateTime: any;
+  /**
+   * The `Long` scalar type represents non-fractional signed whole numeric values.
+   * Long can represent values between -(2^63) and 2^63 - 1.
+   */
   PRISMIC_Long: any;
+  /** Raw JSON value */
   PRISMIC_Json: any;
+  /** Date */
   PRISMIC_Date: any;
   JSON: never;
 };
@@ -2179,8 +2186,6 @@ type Query_allSitePageArgs = {
 type Query_siteArgs = {
   buildTime: Maybe<DateQueryOperatorInput>;
   siteMetadata: Maybe<SiteSiteMetadataFilterInput>;
-  port: Maybe<IntQueryOperatorInput>;
-  host: Maybe<StringQueryOperatorInput>;
   polyfill: Maybe<BooleanQueryOperatorInput>;
   pathPrefix: Maybe<StringQueryOperatorInput>;
   id: Maybe<StringQueryOperatorInput>;
@@ -2282,8 +2287,6 @@ type Query_allSitePluginArgs = {
 type Site = Node & {
   readonly buildTime: Maybe<Scalars['Date']>;
   readonly siteMetadata: Maybe<SiteSiteMetadata>;
-  readonly port: Maybe<Scalars['Int']>;
-  readonly host: Maybe<Scalars['String']>;
   readonly polyfill: Maybe<Scalars['Boolean']>;
   readonly pathPrefix: Maybe<Scalars['String']>;
   readonly id: Scalars['ID'];
@@ -2487,8 +2490,6 @@ enum SiteFieldsEnum {
   siteMetadata___title = 'siteMetadata.title',
   siteMetadata___description = 'siteMetadata.description',
   siteMetadata___author = 'siteMetadata.author',
-  port = 'port',
-  host = 'host',
   polyfill = 'polyfill',
   pathPrefix = 'pathPrefix',
   id = 'id',
@@ -2582,8 +2583,6 @@ enum SiteFieldsEnum {
 type SiteFilterInput = {
   readonly buildTime: Maybe<DateQueryOperatorInput>;
   readonly siteMetadata: Maybe<SiteSiteMetadataFilterInput>;
-  readonly port: Maybe<IntQueryOperatorInput>;
-  readonly host: Maybe<StringQueryOperatorInput>;
   readonly polyfill: Maybe<BooleanQueryOperatorInput>;
   readonly pathPrefix: Maybe<StringQueryOperatorInput>;
   readonly id: Maybe<StringQueryOperatorInput>;
@@ -3311,25 +3310,9 @@ type NavigationQueryQuery = { readonly prismic: { readonly allNavigations: { rea
           Pick<PRISMIC_Navigation, '_linkType' | 'branding'>
           & { readonly navigation_links: Maybe<ReadonlyArray<(
             Pick<PRISMIC_NavigationNavigation_links, 'label'>
-            & { readonly link: Maybe<(
-              { readonly __typename: 'PRISMIC_Page' }
-              & { readonly _meta: Pick<PRISMIC_Meta, 'uid'> }
-            ) | { readonly __typename: 'PRISMIC_Navigation' } | { readonly __typename: 'PRISMIC_Homepage' } | (
-              { readonly __typename: 'PRISMIC_Contact' }
-              & { readonly _meta: Pick<PRISMIC_Meta, 'uid'> }
-            ) | { readonly __typename: 'PRISMIC__ExternalLink' } | { readonly __typename: 'PRISMIC__FileLink' } | { readonly __typename: 'PRISMIC__ImageLink' }> }
+            & { readonly link: Maybe<{ readonly _meta: Pick<PRISMIC_Meta, 'uid'> } | { readonly _meta: Pick<PRISMIC_Meta, 'uid'> }> }
           )>> }
         ) }>>> } } };
-
-type Unnamed_1_QueryVariables = {};
-
-
-type Unnamed_1_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author'>> }> };
-
-type Unnamed_2_QueryVariables = {};
-
-
-type Unnamed_2_Query = { readonly placeholderImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluidFragment> }> }> };
 
 type ContactQueryVariables = {};
 
@@ -3339,52 +3322,33 @@ type ContactQuery = { readonly prismic: { readonly allContacts: { readonly edges
           & { readonly form_fields: Maybe<ReadonlyArray<Pick<PRISMIC_ContactForm_fields, 'field_name' | 'field_type' | 'required' | 'field_label' | 'field_placeholder'>>> }
         ) }>>> } } };
 
-type PageQueryVariables = {
-  id: Maybe<Scalars['String']>;
-};
-
-
-type PageQuery = { readonly prismic: { readonly allPages: { readonly edges: Maybe<ReadonlyArray<Maybe<{ readonly node: (
-          Pick<PRISMIC_Page, 'page_title' | 'content' | '_linkType'>
-          & { readonly _meta: Pick<PRISMIC_Meta, 'uid' | 'id'>, readonly body: Maybe<ReadonlyArray<(
-            { readonly __typename: 'PRISMIC_PageBodyCall_to_action_grid' }
-            & Pick<PRISMIC_PageBodyCall_to_action_grid, 'type' | 'label'>
-            & { readonly fields: Maybe<ReadonlyArray<(
-              Pick<PRISMIC_PageBodyCall_to_action_gridFields, 'button_label' | 'call_to_action_content' | 'call_to_action_title' | 'featured_image'>
-              & { readonly button_destination: Maybe<{ readonly __typename: 'PRISMIC_Page' } | { readonly __typename: 'PRISMIC_Navigation' } | { readonly __typename: 'PRISMIC_Homepage' } | (
-                { readonly __typename: 'PRISMIC_Contact' }
-                & { readonly _meta: Pick<PRISMIC_Meta, 'uid'> }
-              ) | { readonly __typename: 'PRISMIC__ExternalLink' } | { readonly __typename: 'PRISMIC__FileLink' } | { readonly __typename: 'PRISMIC__ImageLink' }> }
-            )>>, readonly primary: Maybe<Pick<PRISMIC_PageBodyCall_to_action_gridPrimary, 'section_title'>> }
-          )>> }
-        ) }>>> } } };
-
 type HeroQueryVariables = {};
 
 
 type HeroQuery = { readonly prismic: { readonly allHomepages: { readonly edges: Maybe<ReadonlyArray<Maybe<{ readonly node: (
           Pick<PRISMIC_Homepage, '_linkType'>
           & { readonly body: Maybe<ReadonlyArray<(
-            { readonly __typename: 'PRISMIC_HomepageBodyHero' }
-            & Pick<PRISMIC_HomepageBodyHero, 'type' | 'label'>
+            Pick<PRISMIC_HomepageBodyHero, 'type' | 'label'>
             & { readonly primary: Maybe<Pick<PRISMIC_HomepageBodyHeroPrimary, 'hero_title' | 'hero_content' | 'background_image'>> }
           ) | (
-            { readonly __typename: 'PRISMIC_HomepageBodyCall_to_action_grid' }
-            & Pick<PRISMIC_HomepageBodyCall_to_action_grid, 'type'>
+            Pick<PRISMIC_HomepageBodyCall_to_action_grid, 'type'>
             & { readonly primary: Maybe<Pick<PRISMIC_HomepageBodyCall_to_action_gridPrimary, 'section_title'>>, readonly fields: Maybe<ReadonlyArray<(
               Pick<PRISMIC_HomepageBodyCall_to_action_gridFields, 'button_label' | 'call_to_action_content' | 'call_to_action_title' | 'featured_image'>
               & { readonly button_destination: Maybe<(
-                { readonly __typename: 'PRISMIC_Page' }
-                & Pick<PRISMIC_Page, 'page_title' | 'content'>
+                Pick<PRISMIC_Page, 'page_title' | 'content'>
                 & { readonly _meta: Pick<PRISMIC_Meta, 'uid'> }
-              ) | { readonly __typename: 'PRISMIC_Navigation' } | { readonly __typename: 'PRISMIC_Homepage' } | { readonly __typename: 'PRISMIC_Contact' } | { readonly __typename: 'PRISMIC__ExternalLink' } | { readonly __typename: 'PRISMIC__FileLink' } | { readonly __typename: 'PRISMIC__ImageLink' }> }
+              )> }
             )>> }
           ) | (
-            { readonly __typename: 'PRISMIC_HomepageBodyPrice_list' }
-            & Pick<PRISMIC_HomepageBodyPrice_list, 'type' | 'label'>
+            Pick<PRISMIC_HomepageBodyPrice_list, 'type' | 'label'>
             & { readonly fields: Maybe<ReadonlyArray<Pick<PRISMIC_HomepageBodyPrice_listFields, 'price_type' | 'price_per_month' | 'price_list_title' | 'price_list_description'>>>, readonly primary: Maybe<Pick<PRISMIC_HomepageBodyPrice_listPrimary, 'title'>> }
           )>> }
         ) }>>> } } };
+
+type SEOQueryVariables = {};
+
+
+type SEOQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author'>> }> };
 
 type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 
@@ -3434,9 +3398,20 @@ type GatsbyImageSharpSizes_noBase64Fragment = Pick<ImageSharpSizes, 'aspectRatio
 
 type GatsbyImageSharpSizes_withWebp_noBase64Fragment = Pick<ImageSharpSizes, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
 
-type PagesQueryQueryVariables = {};
+type PageQueryVariables = {
+  id: Maybe<Scalars['String']>;
+};
 
 
-type PagesQueryQuery = { readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
+type PageQuery = { readonly prismic: { readonly allPages: { readonly edges: Maybe<ReadonlyArray<Maybe<{ readonly node: (
+          Pick<PRISMIC_Page, 'page_title' | 'content' | '_linkType'>
+          & { readonly _meta: Pick<PRISMIC_Meta, 'uid' | 'id'>, readonly body: Maybe<ReadonlyArray<(
+            Pick<PRISMIC_PageBodyCall_to_action_grid, 'type' | 'label'>
+            & { readonly fields: Maybe<ReadonlyArray<(
+              Pick<PRISMIC_PageBodyCall_to_action_gridFields, 'button_label' | 'call_to_action_content' | 'call_to_action_title' | 'featured_image'>
+              & { readonly button_destination: Maybe<{ readonly _meta: Pick<PRISMIC_Meta, 'uid'> }> }
+            )>>, readonly primary: Maybe<Pick<PRISMIC_PageBodyCall_to_action_gridPrimary, 'section_title'>> }
+          )>> }
+        ) }>>> } } };
 
 }

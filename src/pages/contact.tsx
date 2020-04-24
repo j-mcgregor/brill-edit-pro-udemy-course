@@ -1,9 +1,9 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import RichText from '../utils/RichText'
-import Layout from '../components/Layout'
-import SEO from '../components/SEO'
-import Form from '../components/forms/Form'
+import Layout from '../components/layout'
+import SEO from '../components/seo'
+import Form from '../components/forms/form'
 
 export const query = graphql`
     query Contact {
