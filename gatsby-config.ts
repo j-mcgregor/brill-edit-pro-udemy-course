@@ -58,10 +58,6 @@ export default {
                 ],
             },
         },
-        {
-            resolve: 'gatsby-plugin-codegen',
-            options: {},
-        },
         'gatsby-plugin-typescript',
         {
             resolve: 'gatsby-plugin-typegen',

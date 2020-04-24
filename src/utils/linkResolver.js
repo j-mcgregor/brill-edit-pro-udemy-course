@@ -1,9 +1,7 @@
-module.exports = {
-    linkResolver(doc) {
-        if (doc.type === 'article') {
-            return `/article/${doc.uid}`
-        }
+export const linkResolver = doc => {
+    if (doc.type === 'page') {
+        return `/${doc.uid}`
+    }
 
-        return '/'
-    },
+    return '/'
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { RichText } from 'prismic-reactjs'
+import RichText from '../../utils/RichText'
 import { Link } from 'gatsby'
 
 interface CallToActionCardProps {

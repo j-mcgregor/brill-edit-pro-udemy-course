@@ -1,8 +1,8 @@
 import React from 'react'
 import Hero, { BackgroundImageProps } from './Hero'
 import createKey from '../utils/createKey'
-import CallToActionGrid from './CallToActionGrid'
-import PriceListGrid from './PriceListGrid'
+import CallToActionGrid from './callToAction/CallToActionGrid'
+import PriceListGrid from './priceList/PriceListGrid'
 
 export interface CallToActionProps {
     _typename: string

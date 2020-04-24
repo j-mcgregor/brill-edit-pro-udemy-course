@@ -72,7 +72,6 @@ const IndexPage = ({
 }: {
     data: GatsbyTypes.HeroQuery
 }) => {
-    console.log(edges)
     let body: any | undefined
     if (edges && edges[0] && edges[0].node.body) {
         body = edges[0].node.body

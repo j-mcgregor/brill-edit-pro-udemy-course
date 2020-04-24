@@ -1,7 +1,8 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import { RichText } from 'prismic-reactjs'
+import RichText from '../utils/RichText'
 import Layout from '../components/Layout'
+import SliceZone from '../components/SliceZone'
 
 // we're expecting a page ID param that we can include in here
 // This page is handled in the gatsby-config file
@@ -18,6 +19,28 @@ export const pageQuery = graphql`
                             uid
                             id
                         }
+                        body {
+                            ... on PRISMIC_PageBodyCall_to_action_grid {
+                                type
+                                label
+                                fields {
+                                    button_destination {
+                                        ... on PRISMIC_Contact {
+                                            _meta {
+                                                uid
+                                            }
+                                        }
+                                    }
+                                    button_label
+                                    call_to_action_content
+                                    call_to_action_title
+                                    featured_image
+                                }
+                                primary {
+                                    section_title
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -25,23 +48,28 @@ export const pageQuery = graphql`
     }
 `
 
-const Page = ({ data }: { data: GatsbyTypes.PageQuery }) => {
+const Page = ({
+    data: {
+        prismic: {
+            allPages: { edges },
+        },
+    },
+}: {
+    data: GatsbyTypes.PageQuery
+}) => {
+    console.log(edges)
     return (
         <Layout>
             <div className="container">
-                {data.prismic.allPages.edges ? (
+                {edges ? (
                     <>
-                        <RichText
-                            render={
-                                data.prismic.allPages.edges[0]?.node.page_title
-                            }
-                        />
+                        <RichText render={edges[0]?.node.page_title} />
                         <hr />
-                        <RichText
-                            render={
-                                data.prismic.allPages.edges[0]?.node.content
-                            }
-                        />
+                        <RichText render={edges[0]?.node.content} />
+                        <hr />
+                        {edges[0]?.node.body && (
+                            <SliceZone body={edges[0]?.node.body} />
+                        )}
                     </>
                 ) : (
                     <h1>Nothing</h1>

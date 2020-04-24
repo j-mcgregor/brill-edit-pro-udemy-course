@@ -1,7 +1,7 @@
 import React from 'react'
-import { RichText } from 'prismic-reactjs'
+import RichText from '../../utils/RichText'
 import PriceListCard from './PriceListCard'
-import createKey from '../utils/createKey'
+import createKey from '../../utils/createKey'
 
 export interface RichTextItemProps {
     type: string

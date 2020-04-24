@@ -13,6 +13,7 @@ type Scalars = {
   PRISMIC_DateTime: any;
   PRISMIC_Long: any;
   PRISMIC_Json: any;
+  PRISMIC_Date: any;
   JSON: never;
 };
 
@@ -1501,6 +1502,8 @@ type PRISMIC = {
   readonly allPages: PRISMIC_PageConnectionConnection;
   readonly allNavigations: PRISMIC_NavigationConnectionConnection;
   readonly allHomepages: PRISMIC_HomepageConnectionConnection;
+  readonly contact: Maybe<PRISMIC_Contact>;
+  readonly allContacts: PRISMIC_ContactConnectionConnection;
 };
 
 
@@ -1615,6 +1618,39 @@ type PRISMIC_allHomepagesArgs = {
   last: Maybe<Scalars['Int']>;
 };
 
+
+type PRISMIC_contactArgs = {
+  uid: Scalars['String'];
+  lang: Scalars['String'];
+};
+
+
+type PRISMIC_allContactsArgs = {
+  sortBy: Maybe<PRISMIC_SortContacty>;
+  id: Maybe<Scalars['String']>;
+  id_in: Maybe<ReadonlyArray<Scalars['String']>>;
+  uid: Maybe<Scalars['String']>;
+  uid_in: Maybe<ReadonlyArray<Scalars['String']>>;
+  lang: Maybe<Scalars['String']>;
+  tags: Maybe<ReadonlyArray<Scalars['String']>>;
+  tags_in: Maybe<ReadonlyArray<Scalars['String']>>;
+  type: Maybe<Scalars['String']>;
+  type_in: Maybe<ReadonlyArray<Scalars['String']>>;
+  firstPublicationDate: Maybe<Scalars['PRISMIC_DateTime']>;
+  firstPublicationDate_after: Maybe<Scalars['PRISMIC_DateTime']>;
+  firstPublicationDate_before: Maybe<Scalars['PRISMIC_DateTime']>;
+  lastPublicationDate: Maybe<Scalars['PRISMIC_DateTime']>;
+  lastPublicationDate_after: Maybe<Scalars['PRISMIC_DateTime']>;
+  lastPublicationDate_before: Maybe<Scalars['PRISMIC_DateTime']>;
+  fulltext: Maybe<Scalars['String']>;
+  similar: Maybe<PRISMIC_similar>;
+  where: Maybe<PRISMIC_WhereContact>;
+  before: Maybe<Scalars['String']>;
+  after: Maybe<Scalars['String']>;
+  first: Maybe<Scalars['Int']>;
+  last: Maybe<Scalars['Int']>;
+};
+
 /** A prismic document */
 type PRISMIC__Document = {
   readonly _meta: PRISMIC_Meta;
@@ -1665,6 +1701,40 @@ type PRISMIC__ImageLink = PRISMIC__Linkable & {
 type PRISMIC__Linkable = {
   readonly _linkType: Maybe<Scalars['String']>;
 };
+
+type PRISMIC_Contact = PRISMIC__Document & PRISMIC__Linkable & {
+  readonly form_title: Maybe<Scalars['PRISMIC_Json']>;
+  readonly form_description: Maybe<Scalars['PRISMIC_Json']>;
+  readonly form_fields: Maybe<ReadonlyArray<PRISMIC_ContactForm_fields>>;
+  readonly _meta: PRISMIC_Meta;
+  readonly _linkType: Maybe<Scalars['String']>;
+};
+
+/** A connection to a list of items. */
+type PRISMIC_ContactConnectionConnection = {
+  /** Information to aid in pagination. */
+  readonly pageInfo: PRISMIC_PageInfo;
+  /** A list of edges. */
+  readonly edges: Maybe<ReadonlyArray<Maybe<PRISMIC_ContactConnectionEdge>>>;
+  readonly totalCount: Scalars['PRISMIC_Long'];
+};
+
+/** An edge in a connection. */
+type PRISMIC_ContactConnectionEdge = {
+  /** The item at the end of the edge. */
+  readonly node: PRISMIC_Contact;
+  /** A cursor for use in pagination. */
+  readonly cursor: Scalars['String'];
+};
+
+type PRISMIC_ContactForm_fields = {
+  readonly field_name: Maybe<Scalars['String']>;
+  readonly field_label: Maybe<Scalars['String']>;
+  readonly field_placeholder: Maybe<Scalars['String']>;
+  readonly field_type: Maybe<Scalars['String']>;
+  readonly required: Maybe<Scalars['String']>;
+};
+
 
 
 type PRISMIC_Homepage = PRISMIC__Document & PRISMIC__Linkable & {
@@ -1778,6 +1848,7 @@ type PRISMIC_Navigation = PRISMIC__Document & PRISMIC__Linkable & {
   readonly branding: Maybe<Scalars['String']>;
   readonly page_link: Maybe<PRISMIC__Linkable>;
   readonly navigation_links: Maybe<ReadonlyArray<PRISMIC_NavigationNavigation_links>>;
+  readonly date_field: Maybe<Scalars['PRISMIC_Date']>;
   readonly _meta: PRISMIC_Meta;
   readonly _linkType: Maybe<Scalars['String']>;
 };
@@ -1807,8 +1878,36 @@ type PRISMIC_NavigationNavigation_links = {
 type PRISMIC_Page = PRISMIC__Document & PRISMIC__Linkable & {
   readonly page_title: Maybe<Scalars['PRISMIC_Json']>;
   readonly content: Maybe<Scalars['PRISMIC_Json']>;
+  readonly body: Maybe<ReadonlyArray<PRISMIC_PageBody>>;
   readonly _meta: PRISMIC_Meta;
   readonly _linkType: Maybe<Scalars['String']>;
+};
+
+type PRISMIC_PageBody = PRISMIC_PageBodyCall_to_action_grid;
+
+type PRISMIC_PageBodyCall_to_action_grid = {
+  readonly type: Maybe<Scalars['String']>;
+  readonly label: Maybe<Scalars['String']>;
+  readonly primary: Maybe<PRISMIC_PageBodyCall_to_action_gridPrimary>;
+  readonly fields: Maybe<ReadonlyArray<PRISMIC_PageBodyCall_to_action_gridFields>>;
+};
+
+type PRISMIC_PageBodyCall_to_action_gridFields = {
+  readonly featured_image: Maybe<Scalars['PRISMIC_Json']>;
+  readonly call_to_action_title: Maybe<Scalars['PRISMIC_Json']>;
+  readonly call_to_action_content: Maybe<Scalars['PRISMIC_Json']>;
+  readonly button_label: Maybe<Scalars['String']>;
+  readonly button_destination: Maybe<PRISMIC__Linkable>;
+  readonly featured_imageSharp: Maybe<File>;
+};
+
+
+type PRISMIC_PageBodyCall_to_action_gridFields_featured_imageSharpArgs = {
+  crop: Maybe<Scalars['String']>;
+};
+
+type PRISMIC_PageBodyCall_to_action_gridPrimary = {
+  readonly section_title: Maybe<Scalars['PRISMIC_Json']>;
 };
 
 /** A connection to a list of items. */
@@ -1856,6 +1955,17 @@ type PRISMIC_similar = {
   readonly max: Scalars['Int'];
 };
 
+enum PRISMIC_SortContacty {
+  meta_firstPublicationDate_ASC = 'meta_firstPublicationDate_ASC',
+  meta_firstPublicationDate_DESC = 'meta_firstPublicationDate_DESC',
+  meta_lastPublicationDate_ASC = 'meta_lastPublicationDate_ASC',
+  meta_lastPublicationDate_DESC = 'meta_lastPublicationDate_DESC',
+  form_title_ASC = 'form_title_ASC',
+  form_title_DESC = 'form_title_DESC',
+  form_description_ASC = 'form_description_ASC',
+  form_description_DESC = 'form_description_DESC'
+}
+
 enum PRISMIC_SortDocumentsBy {
   meta_firstPublicationDate_ASC = 'meta_firstPublicationDate_ASC',
   meta_firstPublicationDate_DESC = 'meta_firstPublicationDate_DESC',
@@ -1876,7 +1986,9 @@ enum PRISMIC_SortNavigationy {
   meta_lastPublicationDate_ASC = 'meta_lastPublicationDate_ASC',
   meta_lastPublicationDate_DESC = 'meta_lastPublicationDate_DESC',
   branding_ASC = 'branding_ASC',
-  branding_DESC = 'branding_DESC'
+  branding_DESC = 'branding_DESC',
+  date_field_ASC = 'date_field_ASC',
+  date_field_DESC = 'date_field_DESC'
 }
 
 enum PRISMIC_SortPagey {
@@ -1890,11 +2002,24 @@ enum PRISMIC_SortPagey {
   content_DESC = 'content_DESC'
 }
 
+type PRISMIC_WhereContact = {
+  /** form_title */
+  readonly form_title_fulltext: Maybe<Scalars['String']>;
+  /** form_description */
+  readonly form_description_fulltext: Maybe<Scalars['String']>;
+};
+
 type PRISMIC_WhereNavigation = {
   readonly branding: Maybe<Scalars['String']>;
   readonly branding_fulltext: Maybe<Scalars['String']>;
   /** page_link */
   readonly page_link: Maybe<Scalars['String']>;
+  /** date_field */
+  readonly date_field: Maybe<Scalars['PRISMIC_Date']>;
+  /** date_field */
+  readonly date_field_before: Maybe<Scalars['PRISMIC_Date']>;
+  /** date_field */
+  readonly date_field_after: Maybe<Scalars['PRISMIC_Date']>;
 };
 
 type PRISMIC_WherePage = {
@@ -3186,19 +3311,53 @@ type NavigationQueryQuery = { readonly prismic: { readonly allNavigations: { rea
           Pick<PRISMIC_Navigation, '_linkType' | 'branding'>
           & { readonly navigation_links: Maybe<ReadonlyArray<(
             Pick<PRISMIC_NavigationNavigation_links, 'label'>
-            & { readonly link: Maybe<{ readonly _meta: Pick<PRISMIC_Meta, 'uid'> }> }
+            & { readonly link: Maybe<(
+              { readonly __typename: 'PRISMIC_Page' }
+              & { readonly _meta: Pick<PRISMIC_Meta, 'uid'> }
+            ) | { readonly __typename: 'PRISMIC_Navigation' } | { readonly __typename: 'PRISMIC_Homepage' } | (
+              { readonly __typename: 'PRISMIC_Contact' }
+              & { readonly _meta: Pick<PRISMIC_Meta, 'uid'> }
+            ) | { readonly __typename: 'PRISMIC__ExternalLink' } | { readonly __typename: 'PRISMIC__FileLink' } | { readonly __typename: 'PRISMIC__ImageLink' }> }
           )>> }
         ) }>>> } } };
 
 type Unnamed_1_QueryVariables = {};
 
 
-type Unnamed_1_Query = { readonly placeholderImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluidFragment> }> }> };
+type Unnamed_1_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author'>> }> };
 
 type Unnamed_2_QueryVariables = {};
 
 
-type Unnamed_2_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author'>> }> };
+type Unnamed_2_Query = { readonly placeholderImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluidFragment> }> }> };
+
+type ContactQueryVariables = {};
+
+
+type ContactQuery = { readonly prismic: { readonly allContacts: { readonly edges: Maybe<ReadonlyArray<Maybe<{ readonly node: (
+          Pick<PRISMIC_Contact, 'form_description' | 'form_title'>
+          & { readonly form_fields: Maybe<ReadonlyArray<Pick<PRISMIC_ContactForm_fields, 'field_name' | 'field_type' | 'required' | 'field_label' | 'field_placeholder'>>> }
+        ) }>>> } } };
+
+type PageQueryVariables = {
+  id: Maybe<Scalars['String']>;
+};
+
+
+type PageQuery = { readonly prismic: { readonly allPages: { readonly edges: Maybe<ReadonlyArray<Maybe<{ readonly node: (
+          Pick<PRISMIC_Page, 'page_title' | 'content' | '_linkType'>
+          & { readonly _meta: Pick<PRISMIC_Meta, 'uid' | 'id'>, readonly body: Maybe<ReadonlyArray<(
+            { readonly __typename: 'PRISMIC_PageBodyCall_to_action_grid' }
+            & Pick<PRISMIC_PageBodyCall_to_action_grid, 'type' | 'label'>
+            & { readonly fields: Maybe<ReadonlyArray<(
+              Pick<PRISMIC_PageBodyCall_to_action_gridFields, 'button_label' | 'call_to_action_content' | 'call_to_action_title' | 'featured_image'>
+              & { readonly button_destination: Maybe<{ readonly __typename: 'PRISMIC_Page' } | { readonly __typename: 'PRISMIC_Navigation' } | { readonly __typename: 'PRISMIC_Homepage' } | (
+                { readonly __typename: 'PRISMIC_Contact' }
+                & { readonly _meta: Pick<PRISMIC_Meta, 'uid'> }
+              ) | { readonly __typename: 'PRISMIC__ExternalLink' } | { readonly __typename: 'PRISMIC__FileLink' } | { readonly __typename: 'PRISMIC__ImageLink' }> }
+            )>>, readonly primary: Maybe<Pick<PRISMIC_PageBodyCall_to_action_gridPrimary, 'section_title'>> }
+          )>> }
+        ) }>>> } } };
 
 type HeroQueryVariables = {};
 
@@ -3218,7 +3377,7 @@ type HeroQuery = { readonly prismic: { readonly allHomepages: { readonly edges: 
                 { readonly __typename: 'PRISMIC_Page' }
                 & Pick<PRISMIC_Page, 'page_title' | 'content'>
                 & { readonly _meta: Pick<PRISMIC_Meta, 'uid'> }
-              ) | { readonly __typename: 'PRISMIC_Navigation' } | { readonly __typename: 'PRISMIC_Homepage' } | { readonly __typename: 'PRISMIC__ExternalLink' } | { readonly __typename: 'PRISMIC__FileLink' } | { readonly __typename: 'PRISMIC__ImageLink' }> }
+              ) | { readonly __typename: 'PRISMIC_Navigation' } | { readonly __typename: 'PRISMIC_Homepage' } | { readonly __typename: 'PRISMIC_Contact' } | { readonly __typename: 'PRISMIC__ExternalLink' } | { readonly __typename: 'PRISMIC__FileLink' } | { readonly __typename: 'PRISMIC__ImageLink' }> }
             )>> }
           ) | (
             { readonly __typename: 'PRISMIC_HomepageBodyPrice_list' }
@@ -3226,21 +3385,6 @@ type HeroQuery = { readonly prismic: { readonly allHomepages: { readonly edges: 
             & { readonly fields: Maybe<ReadonlyArray<Pick<PRISMIC_HomepageBodyPrice_listFields, 'price_type' | 'price_per_month' | 'price_list_title' | 'price_list_description'>>>, readonly primary: Maybe<Pick<PRISMIC_HomepageBodyPrice_listPrimary, 'title'>> }
           )>> }
         ) }>>> } } };
-
-type PageQueryVariables = {
-  id: Maybe<Scalars['String']>;
-};
-
-
-type PageQuery = { readonly prismic: { readonly allPages: { readonly edges: Maybe<ReadonlyArray<Maybe<{ readonly node: (
-          Pick<PRISMIC_Page, 'page_title' | 'content' | '_linkType'>
-          & { readonly _meta: Pick<PRISMIC_Meta, 'uid' | 'id'> }
-        ) }>>> } } };
-
-type PagesQueryQueryVariables = {};
-
-
-type PagesQueryQuery = { readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
 
 type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 
@@ -3289,5 +3433,10 @@ type GatsbyImageSharpSizes_withWebp_tracedSVGFragment = Pick<ImageSharpSizes, 't
 type GatsbyImageSharpSizes_noBase64Fragment = Pick<ImageSharpSizes, 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
 
 type GatsbyImageSharpSizes_withWebp_noBase64Fragment = Pick<ImageSharpSizes, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
+
+type PagesQueryQueryVariables = {};
+
+
+type PagesQueryQuery = { readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
 
 }

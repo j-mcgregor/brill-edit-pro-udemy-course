@@ -1,7 +1,5 @@
 import { Link, StaticQuery, graphql } from 'gatsby'
 import React from 'react'
-import { get } from 'lodash'
-import prismicPathCreator from '../utils/prismicPathCreator'
 
 import './Header.scss'
 
@@ -16,6 +14,11 @@ export const navigationQuery = graphql`
                         navigation_links {
                             link {
                                 ... on PRISMIC_Page {
+                                    _meta {
+                                        uid
+                                    }
+                                }
+                                ... on PRISMIC_Contact {
                                     _meta {
                                         uid
                                     }

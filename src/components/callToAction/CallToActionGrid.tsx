@@ -1,8 +1,8 @@
 import React from 'react'
-import { RichText } from 'prismic-reactjs'
-import { CallToActionProps } from './SliceZone'
+import RichText from '../../utils/RichText'
+import { CallToActionProps } from '../SliceZone'
 import CallToActionCard from './CallToActionCard'
-import createKey from '../utils/createKey'
+import createKey from '../../utils/createKey'
 
 interface CallToActionGridProps {
     title: string
