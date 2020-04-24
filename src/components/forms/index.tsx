@@ -21,13 +21,8 @@ const Form = ({ fields }: FormProps) => {
     const [email, setEmail] = useState('')
     const [message, setMessage] = useState('')
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault()
-    }
-
     return (
         <form
-            onSubmit={handleSubmit}
             data-netlify="true"
             method="POST"
             name="contact"
