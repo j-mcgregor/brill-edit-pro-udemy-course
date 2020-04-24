@@ -3314,6 +3314,11 @@ type NavigationQueryQuery = { readonly prismic: { readonly allNavigations: { rea
           )>> }
         ) }>>> } } };
 
+type SEOQueryVariables = {};
+
+
+type SEOQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author'>> }> };
+
 type ContactQueryVariables = {};
 
 
@@ -3345,10 +3350,21 @@ type HeroQuery = { readonly prismic: { readonly allHomepages: { readonly edges: 
           )>> }
         ) }>>> } } };
 
-type SEOQueryVariables = {};
+type PageQueryVariables = {
+  id: Maybe<Scalars['String']>;
+};
 
 
-type SEOQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author'>> }> };
+type PageQuery = { readonly prismic: { readonly allPages: { readonly edges: Maybe<ReadonlyArray<Maybe<{ readonly node: (
+          Pick<PRISMIC_Page, 'page_title' | 'content' | '_linkType'>
+          & { readonly _meta: Pick<PRISMIC_Meta, 'uid' | 'id'>, readonly body: Maybe<ReadonlyArray<(
+            Pick<PRISMIC_PageBodyCall_to_action_grid, 'type' | 'label'>
+            & { readonly fields: Maybe<ReadonlyArray<(
+              Pick<PRISMIC_PageBodyCall_to_action_gridFields, 'button_label' | 'call_to_action_content' | 'call_to_action_title' | 'featured_image'>
+              & { readonly button_destination: Maybe<{ readonly _meta: Pick<PRISMIC_Meta, 'uid'> }> }
+            )>>, readonly primary: Maybe<Pick<PRISMIC_PageBodyCall_to_action_gridPrimary, 'section_title'>> }
+          )>> }
+        ) }>>> } } };
 
 type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 
@@ -3397,21 +3413,5 @@ type GatsbyImageSharpSizes_withWebp_tracedSVGFragment = Pick<ImageSharpSizes, 't
 type GatsbyImageSharpSizes_noBase64Fragment = Pick<ImageSharpSizes, 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
 
 type GatsbyImageSharpSizes_withWebp_noBase64Fragment = Pick<ImageSharpSizes, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
-
-type PageQueryVariables = {
-  id: Maybe<Scalars['String']>;
-};
-
-
-type PageQuery = { readonly prismic: { readonly allPages: { readonly edges: Maybe<ReadonlyArray<Maybe<{ readonly node: (
-          Pick<PRISMIC_Page, 'page_title' | 'content' | '_linkType'>
-          & { readonly _meta: Pick<PRISMIC_Meta, 'uid' | 'id'>, readonly body: Maybe<ReadonlyArray<(
-            Pick<PRISMIC_PageBodyCall_to_action_grid, 'type' | 'label'>
-            & { readonly fields: Maybe<ReadonlyArray<(
-              Pick<PRISMIC_PageBodyCall_to_action_gridFields, 'button_label' | 'call_to_action_content' | 'call_to_action_title' | 'featured_image'>
-              & { readonly button_destination: Maybe<{ readonly _meta: Pick<PRISMIC_Meta, 'uid'> }> }
-            )>>, readonly primary: Maybe<Pick<PRISMIC_PageBodyCall_to_action_gridPrimary, 'section_title'>> }
-          )>> }
-        ) }>>> } } };
 
 }

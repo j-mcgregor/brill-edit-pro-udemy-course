@@ -1,6 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import RichText from '../utils/RichText'
+import RichText from '../utils/richText'
 import Layout from '../components/layout'
 import SliceZone from '../components/sliceZone'
 

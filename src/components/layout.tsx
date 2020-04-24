@@ -9,7 +9,7 @@ import Header from './header'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../stylesheets/main.scss'
-import './Layout.scss'
+import './layout.scss'
 
 const Layout: React.SFC<{}> = ({ children }) => {
     return (

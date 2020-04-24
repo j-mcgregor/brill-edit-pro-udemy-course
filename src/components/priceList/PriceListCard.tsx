@@ -1,5 +1,5 @@
 import React from 'react'
-import RichText from '../../utils/RichText'
+import RichText from '../../utils/richText'
 import { RichTextItemProps } from './priceListGrid'
 import styled from 'styled-components'
 

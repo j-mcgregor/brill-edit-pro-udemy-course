@@ -1,5 +1,5 @@
 import React from 'react'
-import RichText from '../../utils/RichText'
+import RichText from '../../utils/richText'
 import { CallToActionProps } from '../sliceZone'
 import CallToActionCard from './callToActionCard'
 import createKey from '../../utils/createKey'

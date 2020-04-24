@@ -1,5 +1,5 @@
 import React from 'react'
-import RichText from '../../utils/RichText'
+import RichText from '../../utils/richText'
 import PriceListCard from './priceListCard'
 import createKey from '../../utils/createKey'
 
