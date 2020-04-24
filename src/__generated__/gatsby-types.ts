@@ -3304,6 +3304,11 @@ type StringQueryOperatorInput = {
   readonly glob: Maybe<Scalars['String']>;
 };
 
+type SEOQueryVariables = {};
+
+
+type SEOQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author'>> }> };
+
 type NavigationQueryQueryVariables = {};
 
 
@@ -3314,11 +3319,6 @@ type NavigationQueryQuery = { readonly prismic: { readonly allNavigations: { rea
             & { readonly link: Maybe<{ readonly _meta: Pick<PRISMIC_Meta, 'uid'> } | { readonly _meta: Pick<PRISMIC_Meta, 'uid'> }> }
           )>> }
         ) }>>> } } };
-
-type SEOQueryVariables = {};
-
-
-type SEOQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author'>> }> };
 
 type ContactQueryVariables = {};
 
@@ -3375,11 +3375,6 @@ type PageQuery = { readonly prismic: { readonly allPages: { readonly edges: Mayb
           )>> }
         ) }>>> } } };
 
-type PagesQueryQueryVariables = {};
-
-
-type PagesQueryQuery = { readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
-
 type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 
 type GatsbyImageSharpFixed_tracedSVGFragment = Pick<ImageSharpFixed, 'tracedSVG' | 'width' | 'height' | 'src' | 'srcSet'>;
@@ -3427,5 +3422,10 @@ type GatsbyImageSharpSizes_withWebp_tracedSVGFragment = Pick<ImageSharpSizes, 't
 type GatsbyImageSharpSizes_noBase64Fragment = Pick<ImageSharpSizes, 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
 
 type GatsbyImageSharpSizes_withWebp_noBase64Fragment = Pick<ImageSharpSizes, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
+
+type PagesQueryQueryVariables = {};
+
+
+type PagesQueryQuery = { readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
 
 }

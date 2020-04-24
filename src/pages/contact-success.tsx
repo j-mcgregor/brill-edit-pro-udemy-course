@@ -3,7 +3,9 @@ import Layout from '../components/layout'
 
 const ContactSuccess = () => (
     <Layout>
-        <h1>Contact Success</h1>
+        <div className="flex flex-center">
+            <h1>Contact Success</h1>
+        </div>
     </Layout>
 )
 

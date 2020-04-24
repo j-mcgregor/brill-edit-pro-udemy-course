@@ -26,7 +26,7 @@ const Form = ({ fields }: FormProps) => {
             data-netlify="true"
             method="POST"
             name="contact"
-            action="contact-success"
+            action="/contact-success"
         >
             {fields.map((f: FormFieldProps, i: number) => {
                 if (f.field_type === 'text') {
