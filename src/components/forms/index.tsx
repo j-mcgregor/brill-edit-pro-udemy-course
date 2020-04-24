@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import createKey from '../../utils/createKey'
 import TextInput from './textInput'
 import TextAreaInput from './textAreaInput'
@@ -16,26 +16,11 @@ interface FormProps {
 }
 
 const Form = ({ fields }: FormProps) => {
-    const [firstName, setFirstName] = useState('')
-    const [lastName, setLastName] = useState('')
-    const [email, setEmail] = useState('')
-    const [message, setMessage] = useState('')
-
     return (
-        <form
-            data-netlify="true"
-            method="POST"
-            name="contact"
-            action="/contact-success"
-        >
+        <form data-netlify="true" method="POST" name="contact">
+            <input type="hidden" name="contact-form" value="contact" />
             {fields.map((f: FormFieldProps, i: number) => {
                 if (f.field_type === 'text') {
-                    const [val, handleChange] =
-                        f.field_name === 'First Name'
-                            ? [firstName, setFirstName]
-                            : f.field_name === 'Last Name'
-                            ? [lastName, setLastName]
-                            : ['', new Function()]
                     return (
                         <TextInput
                             key={createKey(f.field_name, i)}
@@ -44,10 +29,6 @@ const Form = ({ fields }: FormProps) => {
                             label={f.field_label}
                             name={f.field_name}
                             required={f.required}
-                            value={val}
-                            onChange={(e: React.FormEvent<HTMLInputElement>) =>
-                                handleChange(e.currentTarget.value)
-                            }
                         />
                     )
                 } else if (f.field_type === 'email') {
@@ -59,10 +40,6 @@ const Form = ({ fields }: FormProps) => {
                             placeholder={f.field_placeholder}
                             name={f.field_name}
                             required={f.required}
-                            value={email}
-                            onChange={(e: React.FormEvent<HTMLInputElement>) =>
-                                setEmail(e.currentTarget.value)
-                            }
                         />
                     )
                 } else if (f.field_type === 'textarea') {
@@ -73,10 +50,6 @@ const Form = ({ fields }: FormProps) => {
                             label={f.field_label}
                             name={f.field_name}
                             required={f.required}
-                            value={message}
-                            onChange={(
-                                e: React.FormEvent<HTMLTextAreaElement>
-                            ) => setMessage(e.currentTarget.value)}
                         />
                     )
                 } else {
@@ -86,7 +59,6 @@ const Form = ({ fields }: FormProps) => {
             <button className="btn btn-dark btn-lg" type="submit">
                 Submit
             </button>
-            <input type="hidden" name="contact-form" value="contact" />
         </form>
     )
 }

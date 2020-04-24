@@ -6,8 +6,6 @@ export interface TextInputProps {
     label?: string
     name: string
     required: boolean
-    value: string
-    onChange(e: React.FormEvent<HTMLInputElement>): void
 }
 
 const TextInput = ({
@@ -16,8 +14,6 @@ const TextInput = ({
     label,
     name,
     required,
-    value,
-    onChange,
 }: TextInputProps) => (
     <div className="form-group">
         {label && <label>{label}</label>}
@@ -27,8 +23,6 @@ const TextInput = ({
             className="form-control"
             name={name}
             required={required}
-            value={value}
-            onChange={onChange}
         />
     </div>
 )
