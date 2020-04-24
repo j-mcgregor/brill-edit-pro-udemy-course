@@ -57,7 +57,6 @@ const Page = ({
 }: {
     data: GatsbyTypes.PageQuery
 }) => {
-    console.log(edges)
     return (
         <Layout>
             <div className="container">

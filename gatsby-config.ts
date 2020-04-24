@@ -53,12 +53,15 @@ export default {
                         type: 'Page', // Prissmic custom types, capitalised
                         match: '/:uid', // the slug of the custom type
                         path: '/',
-                        component: require.resolve('./src/templates/Page.tsx'),
+                        component: require.resolve('./src/templates/page.tsx'),
                     },
                 ],
             },
         },
-        'gatsby-plugin-typescript',
+        {
+            resolve: 'gatsby-plugin-typescript',
+            options: {},
+        },
         {
             resolve: 'gatsby-plugin-typegen',
             options: {

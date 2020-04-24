@@ -23,12 +23,6 @@ const Form = ({ fields }: FormProps) => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
-        console.log({
-            firstName,
-            lastName,
-            email,
-            message,
-        })
     }
 
     return (

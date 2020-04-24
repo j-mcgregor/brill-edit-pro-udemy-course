@@ -1,3 +1,10 @@
+query PagesQuery {
+  allSitePage(filter: { path: { ne: "/dev-404-page/" } }) {
+    nodes {
+      path
+    }
+  }
+}
 fragment GatsbyImageSharpFixed on ImageSharpFixed {
   base64
   width

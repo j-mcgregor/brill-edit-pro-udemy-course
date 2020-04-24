@@ -59,7 +59,6 @@ const PriceListCard = ({
     price_type,
 }: PriceListCardProps) => {
     const mostPopular = price_type ? true : false
-    console.log(mostPopular)
     return (
         <StyledCard className="bx-y1 p1">
             {mostPopular && (
